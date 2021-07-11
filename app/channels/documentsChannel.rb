@@ -1,6 +1,6 @@
 class DocumentsChannel < ApplicationCable::Channel
   def subscribed
-    @document = Document.find_or_create_by(id: params[:document])
+    @document = Document.find_or_create_by(slug: params[:document])
     puts @document.inspect
     stream_for @document
     broadcast_to(@document, { action: 'set', data: @document.data })

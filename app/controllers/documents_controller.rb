@@ -3,7 +3,7 @@ class DocumentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def update
-    document = Document.find_by(id: params[:id])
+    document = Document.find_by(slug: params[:slug])
     document.data = params[:data].to_s
     document.save
   end
@@ -12,6 +12,6 @@ class DocumentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:document).permit(:id, :data)
+    params.require(:document).permit(:slug, :data)
   end
 end
